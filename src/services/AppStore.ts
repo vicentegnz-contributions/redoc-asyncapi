@@ -89,7 +89,7 @@ export class AppStore {
         this.search.indexItems(this.menu.items);
       }
 
-      this.disposer = observe(this.menu, 'activeItemIdx', (change) => {
+      this.disposer = observe(this.menu, 'activeItemIdx', change => {
         this.updateMarkOnMenu(change.newValue as number);
       });
     }
@@ -145,7 +145,10 @@ export class AppStore {
 
     if (idx === -1 && IS_BROWSER) {
       const $description = document.querySelector('[data-role="redoc-description"]');
+      const $summary = document.querySelector('[data-role="redoc-summary"]');
+
       if ($description) elements.push($description);
+      if ($summary) elements.push($summary);
     }
 
     this.marker.addOnly(elements);

@@ -20,24 +20,24 @@ export const StyledDropdown = styled(Dropdown)`
     min-width: 100px;
     outline: none;
     display: inline-block;
-    border-radius: ${(props) => props.theme.border.radius};;
+    border-radius: 2px;
     border: 1px solid rgba(38, 50, 56, 0.5);
     vertical-align: bottom;
     padding: 2px 0px 2px 6px;
     position: relative;
     width: auto;
     background: white;
-    color: ${(props) => props.theme.dropdown.color};
-    font-family: ${(props) => props.theme.typography.headings.fontFamily};
+    color: #263238;
+    font-family: ${props => props.theme.typography.headings.fontFamily};
     font-size: 0.929em;
     line-height: 1.5em;
     cursor: pointer;
     transition: border 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
     &:hover,
     &:focus-within {
-      border: 1px solid ${(props) => props.theme.colors.primary.main};
-      color: ${(props) => props.theme.colors.primary.main};
-      box-shadow: ${(props) => props.theme.dropdown.focus.boxShadow};
+      border: 1px solid ${props => props.theme.colors.primary.main};
+      color: ${props => props.theme.colors.primary.main};
+      box-shadow: 0px 0px 0px 1px ${props => props.theme.colors.primary.main};
     }
     .dropdown-selector {
       display: inline-flex;
@@ -48,13 +48,13 @@ export const StyledDropdown = styled(Dropdown)`
       margin-bottom: 5px;
     }
     .dropdown-selector-value {
-      font-family: ${(props) => props.theme.typography.headings.fontFamily};
+      font-family: ${props => props.theme.typography.headings.fontFamily};
       position: relative;
       font-size: 0.929em;
       width: 100%;
       line-height: 1;
       vertical-align: middle;
-      color: ${(props) => props.theme.dropdown.color};
+      color: #263238;
       left: 0;
       transition: color 0.25s ease, text-shadow 0.25s ease;
     }
@@ -63,7 +63,7 @@ export const StyledDropdown = styled(Dropdown)`
       right: 3px;
       top: 50%;
       transform: translateY(-50%);
-      border-color: ${(props) => props.theme.colors.primary.main} transparent transparent;
+      border-color: ${props => props.theme.colors.primary.main} transparent transparent;
       border-style: solid;
       border-width: 0.35em 0.35em 0;
       width: 0;
@@ -91,7 +91,7 @@ export const StyledDropdown = styled(Dropdown)`
 
     .dropdown-option {
       font-size: 0.9em;
-      color: ${(props) => props.theme.dropdown.color};
+      color: #263238;
       cursor: pointer;
       padding: 0.4em;
       background-color: #ffffff;
@@ -128,8 +128,8 @@ export const SimpleDropdown = styled(StyledDropdown)`
       border: none;
       box-shadow: none;
       .dropdown-selector-value {
-        color: ${(props) => props.theme.colors.primary.main};
-        text-shadow: 0px 0px 0px ${(props) => props.theme.colors.primary.main};
+        color: ${props => props.theme.colors.primary.main};
+        text-shadow: 0px 0px 0px ${props => props.theme.colors.primary.main};
       }
     }
   }

@@ -34,10 +34,6 @@ const DEFAULT_SERIALIZATION: Record<
     style: 'form',
     explode: true,
   },
-  channel: {
-    style: 'simple',
-    explode: false,
-  },
 };
 
 /**
@@ -45,7 +41,7 @@ const DEFAULT_SERIALIZATION: Record<
  */
 export class FieldModel {
   @observable
-  expanded: boolean | undefined = false;
+  expanded: boolean | undefined = undefined;
 
   schema: SchemaModel;
   name: string;
@@ -59,6 +55,7 @@ export class FieldModel {
   extensions?: Record<string, any>;
   explode: boolean;
   style?: OpenAPIParameterStyle;
+  const?: any;
 
   serializationMime?: string;
 
@@ -91,7 +88,7 @@ export class FieldModel {
     if (info.examples !== undefined) {
       this.examples = mapValues(
         info.examples,
-        (example) => new ExampleModel(parser, example, name, info.encoding),
+        (example, name) => new ExampleModel(parser, example, name, info.encoding),
       );
     }
 
@@ -115,10 +112,22 @@ export class FieldModel {
     if (options.showExtensions) {
       this.extensions = extractExtensions(info, options.showExtensions);
     }
+
+    this.const = this.schema?.const || info?.const || '';
   }
 
   @action
   toggle() {
     this.expanded = !this.expanded;
+  }
+
+  @action
+  collapse(): void {
+    this.expanded = false;
+  }
+
+  @action
+  expand(): void {
+    this.expanded = true;
   }
 }

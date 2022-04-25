@@ -34,6 +34,3 @@ export * from './StickySidebar/StickyResponsiveSidebar';
 export * from './SearchBox/SearchBox';
 export * from './SchemaDefinition/SchemaDefinition';
 export * from './SourceCode/SourceCode';
-
-export * from './Bindings/OperationBindings';
-export * from './Bindings/PathBindings';

@@ -7,6 +7,7 @@ export class SecuritySchemeModel {
   sectionId: string;
   type: OpenAPISecurityScheme['type'];
   description: string;
+  displayName: string;
   apiKey?: {
     name: string;
     in: OpenAPISecurityScheme['in'];
@@ -27,6 +28,7 @@ export class SecuritySchemeModel {
     this.id = id;
     this.sectionId = SECURITY_SCHEMES_SECTION_PREFIX + id;
     this.type = info.type;
+    this.displayName = info['x-displayName'] || id;
     this.description = info.description || '';
     if (info.type === 'apiKey') {
       this.apiKey = {
@@ -60,7 +62,7 @@ export class SecuritySchemesModel {
   constructor(parser: OpenAPIParser) {
     const schemes = (parser.spec.components && parser.spec.components.securitySchemes) || {};
     this.schemes = Object.keys(schemes).map(
-      (name) => new SecuritySchemeModel(parser, name, schemes[name]),
+      name => new SecuritySchemeModel(parser, name, schemes[name]),
     );
   }
 }

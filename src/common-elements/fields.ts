@@ -9,11 +9,11 @@ export const ClickablePropertyNameCell = styled(PropertyNameCell)`
     background-color: transparent;
     border: 0;
     outline: 0;
-    font-size: ${(props) => props.theme.typography.code.fontSize};
-    font-family: ${(props) => props.theme.typography.code.fontFamily};
+    font-size: 13px;
+    font-family: ${props => props.theme.typography.code.fontFamily};
     cursor: pointer;
     padding: 0;
-    color: ${(props) => props.theme.colors.text.primary};
+    color: ${props => props.theme.colors.text.primary};
     &:focus {
       font-weight: ${({ theme }) => theme.typography.fontWeightBold};
     }
@@ -34,23 +34,23 @@ export const FieldLabel = styled.span`
 `;
 
 export const TypePrefix = styled(FieldLabel)`
-  color: ${(props) => transparentize(0.1, props.theme.schema.typeNameColor)};
+  color: ${props => transparentize(0.1, props.theme.schema.typeNameColor)};
 `;
 
 export const TypeName = styled(FieldLabel)`
-  color: ${(props) => props.theme.schema.typeNameColor};
+  color: ${props => props.theme.schema.typeNameColor};
 `;
 
 export const TypeTitle = styled(FieldLabel)`
-  color: ${(props) => props.theme.schema.typeTitleColor};
+  color: ${props => props.theme.schema.typeTitleColor};
   word-break: break-word;
 `;
 
 export const TypeFormat = TypeName;
 
 export const RequiredLabel = styled(FieldLabel.withComponent('div'))`
-  color: ${(props) => props.theme.schema.requireLabelColor};
-  font-size: ${(props) => props.theme.schema.labelsTextSize};
+  color: ${props => props.theme.schema.requireLabelColor};
+  font-size: ${props => props.theme.schema.labelsTextSize};
   font-weight: normal;
   margin-left: 20px;
   line-height: 1;
@@ -58,14 +58,7 @@ export const RequiredLabel = styled(FieldLabel.withComponent('div'))`
 
 export const RecursiveLabel = styled(FieldLabel)`
   color: ${({ theme }) => theme.colors.warning.main};
-  font-size: ${(props) => props.theme.typography.code.fontSize};
-  font-family: ${(props) => props.theme.typography.code.fontFamily};
-`;
-
-export const NullableLabel = styled(FieldLabel)`
-  color: #0e7c86;
-  font-size: ${(props) => props.theme.typography.code.fontSize};
-  font-family: ${(props) => props.theme.typography.code.fontFamily};
+  font-size: 13px;
 `;
 
 export const PatternLabel = styled(FieldLabel)`
@@ -103,7 +96,6 @@ export const ConstraintItem = styled(FieldLabel)`
     margin: 0 ${theme.spacing.unit}px;
     padding: 0 ${theme.spacing.unit}px;
     border: 1px solid ${transparentize(0.9, theme.colors.primary.main)};
-    font-family: ${theme.typography.code.fontFamily};
 }`};
   & + & {
     margin-left: 0;

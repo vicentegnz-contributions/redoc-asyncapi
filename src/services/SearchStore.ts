@@ -23,8 +23,8 @@ export class SearchStore<T> {
   searchWorker = getWorker();
 
   indexItems(groups: Array<IMenuItem | OperationModel>) {
-    const recurse = (items) => {
-      items.forEach((group) => {
+    const recurse = items => {
+      items.forEach(group => {
         if (group.type !== 'group') {
           this.add(group.name, group.description || '', group.id);
         }

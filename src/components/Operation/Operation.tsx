@@ -13,19 +13,11 @@ import { Extensions } from '../Fields/Extensions';
 import { Markdown } from '../Markdown/Markdown';
 import { OptionsContext } from '../OptionsProvider';
 import { Parameters } from '../Parameters/Parameters';
-import { ParameterBody } from '../Parameters/ParameterBody';
 import { RequestSamples } from '../RequestSamples/RequestSamples';
 import { ResponsesList } from '../Responses/ResponsesList';
 import { ResponseSamples } from '../ResponseSamples/ResponseSamples';
 import { SecurityRequirements } from '../SecurityRequirement/SecurityRequirement';
-import { PathBindings } from '../Bindings/PathBindings';
-import { OperationBindings } from '../Bindings/OperationBindings';
-
-const OperationRow = styled(Row)`
-  backface-visibility: hidden;
-  contain: content;
-  overflow: hidden;
-`;
+import { SECTION_ATTR } from '../../services';
 
 const Description = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.unit * 6}px;
@@ -40,20 +32,20 @@ export class Operation extends React.Component<OperationProps> {
   render() {
     const { operation } = this.props;
 
-    const { name: summary, description, deprecated, externalDocs, isWebhook, isAsync } = operation;
+    const { name: summary, description, deprecated, externalDocs, isWebhook } = operation;
     const hasDescription = !!(description || externalDocs);
 
     return (
       <OptionsContext.Consumer>
-        {(options) => (
-          <OperationRow>
+        {options => (
+          <Row {...{ [SECTION_ATTR]: operation.operationHash }} id={operation.operationHash}>
             <MiddlePanel>
               <H2>
                 <ShareLink to={operation.id} />
                 {summary} {deprecated && <Badge type="warning"> Deprecated </Badge>}
                 {isWebhook && <Badge type="primary"> Webhook </Badge>}
               </H2>
-              {options.pathInMiddlePanel && !isWebhook && !isAsync && (
+              {options.pathInMiddlePanel && !isWebhook && (
                 <Endpoint operation={operation} inverted={true} />
               )}
               {hasDescription && (
@@ -64,10 +56,7 @@ export class Operation extends React.Component<OperationProps> {
               )}
               <Extensions extensions={operation.extensions} />
               <SecurityRequirements securities={operation.security} />
-              <Parameters parameters={operation.parameters} />
-              <PathBindings bindings={operation.pathBindings} />
-              <OperationBindings bindings={operation.bindings} />
-              <ParameterBody body={operation.requestBody} />
+              <Parameters parameters={operation.parameters} body={operation.requestBody} />
               <ResponsesList responses={operation.responses} />
               <CallbacksList callbacks={operation.callbacks} />
             </MiddlePanel>
@@ -77,7 +66,7 @@ export class Operation extends React.Component<OperationProps> {
               <ResponseSamples operation={operation} />
               <CallbackSamples callbacks={operation.callbacks} />
             </DarkRightPanel>
-          </OperationRow>
+          </Row>
         )}
       </OptionsContext.Consumer>
     );
